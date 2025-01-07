@@ -30,12 +30,14 @@ return {
 			-- list of servers for mason to install
 			ensure_installed = {
 				"lua_ls",
+				"csharp_ls",
 			},
 		})
 
 		mason_tool_installer.setup({
 			ensure_installed = {
 				"stylua", -- lua formatter
+				"csharpier", -- csharp formatter
 			},
 		})
 	end,
