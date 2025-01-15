@@ -2,6 +2,10 @@ local opt = vim.opt
 
 opt.guicursor = ""
 
+-- Disable netrw plugin for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 opt.nu = true
 opt.relativenumber = true
 
