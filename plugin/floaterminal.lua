@@ -1,5 +1,5 @@
 -- TJDeVries (https://github.com/tjdevries/advent-of-nvim/blob/master/nvim/plugin/floaterminal.lua)
-vim.keymap.set("t", "<esc>", "<c-\\><c-n>")
+vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n><cmd>Floaterminal<CR>")
 
 local state = {
 	floating = {
