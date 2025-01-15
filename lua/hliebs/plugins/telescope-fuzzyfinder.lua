@@ -21,8 +21,6 @@ return {
 			},
 		})
 
-		telescope.load_extension("file_browser")
-
 		local keymap = vim.keymap
 
 		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
