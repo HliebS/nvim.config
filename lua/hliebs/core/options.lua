@@ -20,6 +20,9 @@ opt.expandtab = true
 opt.autoindent = true
 
 opt.wrap = false
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldenable = false
 
 opt.swapfile = false
 opt.backup = false
