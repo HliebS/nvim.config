@@ -26,7 +26,7 @@ keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 keymap.set("i", "<C-c>", "<Esc>")
 
 keymap.set("n", "Q", "<nop>")
-keymap.set("n", "<leader>t", "<cmd>Floaterminal<CR>", { desc = "Toggle Floaterminal" })
+keymap.set("n", "<leader>T", "<cmd>Floaterminal<CR>", { desc = "Toggle Floaterminal" })
 
 keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
