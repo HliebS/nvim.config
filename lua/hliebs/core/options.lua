@@ -1,4 +1,7 @@
 vim.cmd("language en_US")
+
+vim.o.shell = '"C:\\Program Files\\PowerShell\\7\\pwsh.exe"'
+
 local opt = vim.opt
 
 opt.guicursor = ""
