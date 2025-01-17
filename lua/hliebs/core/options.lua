@@ -1,3 +1,4 @@
+vim.cmd("language en_US")
 local opt = vim.opt
 
 opt.guicursor = ""
