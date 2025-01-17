@@ -27,5 +27,8 @@ return {
 		keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string" })
 		keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find under cursor" })
 		keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Find recent files" })
+
+		telescope.load_extension("grapple")
+		keymap.set("n", "<leader>ft", "<cmd>Telescope grapple tags<cr>", { desc = "Find tags" })
 	end,
 }
