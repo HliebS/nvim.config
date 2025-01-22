@@ -2,13 +2,17 @@ vim.cmd("language en_US")
 
 vim.o.shell = '"C:\\Program Files\\PowerShell\\7\\pwsh.exe"'
 
+local g = vim.g
+
+-- Disable netrw plugin for nvim-tree
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
+g.undotree_DiffCommand = "diff.exe"
+
 local opt = vim.opt
 
 opt.guicursor = ""
-
--- Disable netrw plugin for nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 opt.nu = true
 opt.relativenumber = true
@@ -25,7 +29,9 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false
 
 opt.swapfile = false
+
 opt.backup = false
+opt.undodir = "undodir"
 opt.undofile = true
 
 opt.ignorecase = true
@@ -44,7 +50,3 @@ opt.updatetime = 50
 
 opt.splitright = true -- split vertical window to the right
 opt.splitbelow = true -- split horizontal window to the bottom
-
-local g = vim.g
-
-g.netrw_liststyle = 3
