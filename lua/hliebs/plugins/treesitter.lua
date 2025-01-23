@@ -7,14 +7,17 @@ return {
 		treesitter.setup({
 			modules = {},
 			ensure_installed = {
+				-- Defaults
 				"c",
 				"lua",
 				"vim",
 				"vimdoc",
 				"query",
 				"markdown",
-				"markdown_inline", -- Defaults
+				"markdown_inline",
+				-- Defaults end
 				"c_sharp",
+				"xml",
 			},
 			auto_install = false,
 			ignore_install = {},
