@@ -25,5 +25,12 @@ return {
 			highlight = { enable = true },
 			indent = { enable = true },
 		})
+
+		-- Associate xaml as xml filetype
+		vim.filetype.add({
+			extension = {
+				xaml = "xml",
+			},
+		})
 	end,
 }
