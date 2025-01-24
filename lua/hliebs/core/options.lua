@@ -31,7 +31,6 @@ opt.foldenable = false
 opt.swapfile = false
 
 opt.backup = false
-opt.undodir = "undodir"
 opt.undofile = true
 
 opt.ignorecase = true
