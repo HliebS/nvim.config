@@ -2,21 +2,33 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
-		opts = {
-			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+		{
+			"folke/lazydev.nvim",
+			ft = "lua", -- only load on lua files
+			opts = {
+				library = {
+					-- See the configuration section for more details
+					-- Load luvit types when the `vim.uv` word is found
+					{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				},
 			},
 		},
+		"Decodetalkers/csharpls-extended-lsp.nvim",
 	},
 	config = function()
 		local lspconfig = require("lspconfig")
 
 		lspconfig.lua_ls.setup({})
-		lspconfig.csharp_ls.setup({})
+
+		lspconfig.csharp_ls.setup({
+			handlers = {
+				["textDocument/definition"] = require("csharpls_extended").handler,
+				["textDocument/typeDefinition"] = require("csharpls_extended").handler,
+			},
+			cmd = { "csharp-ls" },
+		})
+
+		lspconfig.jedi_language_server.setup({})
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -24,6 +36,9 @@ return {
 				-- Buffer local mappings.
 				-- See `:help vim.lsp.*` for documentation on any of the below functions
 				local opts = { buffer = ev.buf, silent = true }
+
+				require("telescope").load_extension("csharpls_definition")
+
 				local keymap = vim.keymap
 
 				-- set keybinds
@@ -34,7 +49,16 @@ return {
 				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
 				opts.desc = "Show LSP definitions"
-				keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
+				keymap.set("n", "gd", function()
+					local filetype = vim.bo.filetype
+					if filetype == "cs" then
+						-- Call Telescope for C# files
+						vim.cmd("Telescope csharpls_definition")
+					else
+						-- Fallback to LSP definition for other filetypes
+						vim.lsp.buf.definition()
+					end
+				end, opts)
 
 				opts.desc = "Show LSP implementations"
 				keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts) -- show lsp implementations

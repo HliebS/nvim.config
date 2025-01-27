@@ -24,7 +24,6 @@ return {
 		mason_lspconfig.setup({
 			ensure_installed = {
 				"lua_ls",
-				"csharp_ls",
 			},
 			automatic_installation = {},
 		})
