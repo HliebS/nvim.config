@@ -3,15 +3,18 @@ return {
 	dependecies = {
 		"nvim-tree/nvim-web-devicons",
 	},
-	config = function()
-		local trouble = require("trouble")
-
-		trouble.setup({})
-
-		local keymap = vim.keymap
-
-		keymap.set("n", "<leader>ww", function()
-			trouble.open("diagnostics")
-		end, { desc = "Toggle trouble with workspace diagnostics" })
-	end,
+	opts = {},
+	cmd = "Trouble",
+	keys = {
+		{
+			"<leader>xx",
+			"<cmd>Trouble diagnostics toggle<cr>",
+			desc = "Diagnostics (Trouble)",
+		},
+		{
+			"<leader>xX",
+			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+			desc = "Buffer Diagnostics (Trouble)",
+		},
+	},
 }
