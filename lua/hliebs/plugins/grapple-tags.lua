@@ -5,6 +5,7 @@ return {
 	},
 	opts = {
 		scope = "git", -- also try out "git_branch"
+		style = "basename", -- show tag path basename and directory hint
 	},
 	event = { "BufReadPost", "BufNewFile" },
 	cmd = "Grapple",
