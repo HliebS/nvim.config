@@ -18,6 +18,7 @@ return {
 				-- Defaults end
 				"c_sharp",
 				"xml",
+				"python",
 			},
 			auto_install = false,
 			ignore_install = {},
