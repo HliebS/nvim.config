@@ -34,6 +34,13 @@ return {
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer" },
 		},
+		cmdline = {
+			keymap = {
+				-- recommended, as the default keymap will only show and select the next item
+				["<Tab>"] = { "show", "accept" },
+			},
+			completion = { menu = { auto_show = true } },
+		},
 	},
 	opts_extend = { "sources.default" },
 }

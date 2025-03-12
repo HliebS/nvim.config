@@ -15,10 +15,15 @@ return {
 				"query",
 				"markdown",
 				"markdown_inline",
-				-- Defaults end
+				-- Backend
 				"c_sharp",
 				"xml",
 				"python",
+				-- Frontend
+				"html",
+				"css",
+				"scss", -- Sass
+				"typescript",
 			},
 			auto_install = false,
 			ignore_install = {},
