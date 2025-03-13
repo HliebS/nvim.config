@@ -9,6 +9,11 @@ return {
 				lua = { "stylua" },
 				csharp = { "csharpier" },
 				python = { "black" },
+				html = { "prettier" },
+				scss = { "prettier" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
+				json = { "prettier" },
 			},
 			format_on_save = {
 				lsp_fallback = true,
