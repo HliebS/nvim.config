@@ -59,3 +59,10 @@ filetype.add({
 	},
 })
 vim.cmd("runtime! ftplugin/html.vim!")
+
+-- Associate xaml as xml filetype
+vim.filetype.add({
+	extension = {
+		xaml = "xml",
+	},
+})
