@@ -49,3 +49,13 @@ opt.updatetime = 50
 
 opt.splitright = true -- split vertical window to the right
 opt.splitbelow = true -- split horizontal window to the bottom
+
+-- Add filetype
+local filetype = vim.filetype
+
+filetype.add({
+	pattern = {
+		[".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
+	},
+})
+vim.cmd("runtime! ftplugin/html.vim!")

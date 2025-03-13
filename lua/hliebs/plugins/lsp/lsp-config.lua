@@ -24,9 +24,13 @@ return {
 
 			html = {},
 
+			angularls = {},
+
 			somesass_ls = {},
 
-			ts_ls = {},
+			--Typescript LSP is provided by typescript-tools.nvim
+
+			jsonls = {},
 		},
 	},
 	config = function(_, opts)
@@ -40,8 +44,8 @@ return {
 					["textDocument/typeDefinition"] = require("csharpls_extended").handler,
 				},
 			},
-			ts_ls = {
-				filetypes = { "javascript", "typescript" },
+			html = {
+				filetypes = { "html", "htmlangular", "templ" },
 			},
 		}
 
@@ -49,6 +53,10 @@ return {
 			-- passing config.capabilities to blink.cmp merges with the capabilities in your
 			-- `opts[server].capabilities, if you've defined it
 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
+
+			if server == "html" then
+				config.capabilities.textDocument.completion.completionItem.snippetSupport = true
+			end
 
 			lspconfig[server].setup(vim.tbl_deep_extend("force", config, server_configs[server] or {}))
 		end
