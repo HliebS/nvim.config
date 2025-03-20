@@ -68,13 +68,17 @@ return {
 				-- See `:help vim.lsp.*` for documentation on any of the below functions
 				local options = { buffer = ev.buf, silent = true }
 
-				require("telescope").load_extension("csharpls_definition")
-
 				local keymap = vim.keymap
 
-				-- set keybinds
+				local telescope = require("telescope")
+
+				local builtin = require("telescope.builtin")
+
+				telescope.load_extension("csharpls_definition")
+
+				-- Set keymaps for LSP
 				options.desc = "Show LSP references"
-				keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", options) -- show definition, references
+				keymap.set("n", "gR", builtin.lsp_references, options) -- references
 
 				options.desc = "Go to declaration"
 				keymap.set("n", "gD", vim.lsp.buf.declaration, options) -- go to declaration
@@ -82,26 +86,26 @@ return {
 				options.desc = "Show LSP definitions"
 				keymap.set("n", "gd", function()
 					local filetype = vim.bo.filetype
+
 					if filetype == "cs" then
-						-- Call Telescope for C# files
+						-- Call csharpls_definition extension for C# files
 						vim.cmd("Telescope csharpls_definition")
 					else
-						-- Fallback to LSP definition for other filetypes
-						vim.lsp.buf.definition()
+						builtin.lsp_definitions()
 					end
 				end, options)
 
 				options.desc = "Show LSP implementations"
-				keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", options) -- show lsp implementations
+				keymap.set("n", "gi", builtin.lsp_implementations, options) -- show lsp implementations
 
 				options.desc = "Show LSP type definitions"
-				keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", options) -- show lsp type definitions
+				keymap.set("n", "gt", builtin.lsp_type_definitions, options) -- show lsp type definitions
 
 				options.desc = "Smart rename"
 				keymap.set("n", "<leader>rn", vim.lsp.buf.rename, options) -- smart rename
 
 				options.desc = "Show buffer diagnostics"
-				keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", options) -- show  diagnostics for file
+				keymap.set("n", "<leader>D", builtin.diagnostics, options) -- show  diagnostics for file
 
 				options.desc = "Show line diagnostics"
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, options) -- show diagnostics for line
