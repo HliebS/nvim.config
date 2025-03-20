@@ -28,8 +28,6 @@ return {
 
 			somesass_ls = {},
 
-			tailwindcss = {},
-
 			--Typescript LSP is provided by typescript-tools.nvim
 
 			jsonls = {},
