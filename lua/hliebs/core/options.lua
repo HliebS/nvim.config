@@ -48,7 +48,7 @@ opt.isfname:append("@-@")
 opt.updatetime = 50
 
 opt.splitright = true -- split vertical window to the right
-opt.splitbelow = true -- split horizontal window to the bottom
+opt.splitbelow = false -- split horizontal window to the top
 
 -- Add filetype
 local filetype = vim.filetype
@@ -65,5 +65,6 @@ vim.filetype.add({
 		xaml = "xml", -- Associate .xaml as .xml
 		csproj = "xml", -- Associate .csproj as .xml
 		esproj = "xml", -- Associate .esproj as .xml
+		props = "xml", -- Associate .props as .xml
 	},
 })
