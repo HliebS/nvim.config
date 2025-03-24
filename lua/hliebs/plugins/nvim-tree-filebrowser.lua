@@ -12,6 +12,7 @@ return {
 			view = {
 				width = 105,
 				relativenumber = true,
+				side = "right",
 			},
 			-- change folder arrow icons
 			renderer = {
@@ -41,7 +42,7 @@ return {
 				custom = { ".DS_Store" },
 			},
 			git = {
-				ignore = false,
+				ignore = true,
 			},
 		})
 	end,
