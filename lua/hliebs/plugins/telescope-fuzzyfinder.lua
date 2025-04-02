@@ -30,5 +30,7 @@ return {
 
 		telescope.load_extension("grapple")
 		keymap.set("n", "<leader>ft", "<cmd>Telescope grapple tags<cr>", { desc = "Find tags" })
+
+		keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", { desc = "Find file changes" })
 	end,
 }
