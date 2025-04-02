@@ -28,6 +28,8 @@ return {
 
 			somesass_ls = {},
 
+			tailwindcss = {},
+
 			--Typescript LSP is provided by typescript-tools.nvim
 
 			jsonls = {},
@@ -46,6 +48,32 @@ return {
 			},
 			html = {
 				filetypes = { "html", "htmlangular", "templ" },
+			},
+			tailwindcss = {
+				settings = {
+					tailwindCSS = {
+						validate = true,
+						lint = {
+							cssConflict = "warning",
+							invalidApply = "error",
+							invalidScreen = "error",
+							invalidVariant = "error",
+							invalidConfigPath = "ignore",
+							invalidTailwindDirective = "error",
+							recommendedVariantOrder = "warning",
+						},
+						classAttributes = {
+							"class",
+							"className",
+							"class:list",
+							"classList",
+							"ngClass",
+						},
+						includeLanguages = {
+							htmlangular = "html",
+						},
+					},
+				},
 			},
 		}
 
