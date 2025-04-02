@@ -1,9 +1,6 @@
 vim.g.mapleader = " "
 
 local keymap = vim.keymap
-keymap.set({ "n", "v", "o" }, "j", "h")
-keymap.set({ "n", "v", "o" }, "h", "j")
-
 keymap.set("n", "<leader>pv", "<cmd>NvimTreeToggle<CR>")
 
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
