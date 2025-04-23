@@ -68,3 +68,21 @@ vim.filetype.add({
 		props = "xml", -- Associate .props as .xml
 	},
 })
+
+vim.lsp.set_log_level("warn")
+
+-- Save original handler
+local orig_handler = vim.lsp.handlers["window/showMessage"]
+
+-- Override
+vim.lsp.handlers["window/showMessage"] = function(err, params, ctx, config)
+	local message = params and params.message or ""
+
+	-- Filter out known noisy csharp-ls messages
+	if message:match("^csharp%-ls:") then
+		return -- Skip these messages
+	end
+
+	-- Fallback to original behavior
+	return orig_handler(err, params, ctx, config)
+end
