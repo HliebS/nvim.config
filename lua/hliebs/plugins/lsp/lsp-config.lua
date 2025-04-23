@@ -39,13 +39,6 @@ return {
 		local lspconfig = require("lspconfig")
 
 		local server_configs = {
-			csharp_ls = {
-				cmd = { "csharp-ls" },
-				handlers = {
-					["textDocument/definition"] = require("csharpls_extended").handler,
-					["textDocument/typeDefinition"] = require("csharpls_extended").handler,
-				},
-			},
 			html = {
 				filetypes = { "html", "htmlangular", "templ" },
 			},
@@ -84,6 +77,10 @@ return {
 
 			if server == "html" then
 				config.capabilities.textDocument.completion.completionItem.snippetSupport = true
+			end
+
+			if server == "csharp_ls" then
+				require("csharpls_extended").buf_read_cmd_bind()
 			end
 
 			lspconfig[server].setup(vim.tbl_deep_extend("force", config, server_configs[server] or {}))
