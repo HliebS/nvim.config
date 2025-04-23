@@ -22,6 +22,7 @@ return {
 				"c_sharp",
 				"xml",
 				"python",
+				"pascal",
 				-- Frontend
 				"html",
 				"css",
