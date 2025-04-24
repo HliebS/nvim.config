@@ -4,16 +4,35 @@ return {
 	config = function()
 		local conform = require("conform")
 
+		--[[
+    In formatters_by_ft, this converter should be accounted for
+    For langeages not present in the converter, file extension should be given
+
+    return {
+      elixir = "ex",
+      graphql = "gql",
+      javascript = "js",
+      javascriptreact = "jsx",
+      markdown = "md",
+      perl = "pl",
+      python = "py",
+      ruby = "rb",
+      rust = "rs",
+      typescript = "ts",
+      typescriptreact = "tsx",
+    }
+    --]]
+
 		conform.setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				csharp = { "csharpier" },
+				cs = { "csharpier" },
 				python = { "black" },
+				javascript = { "prettier" },
+				typescript = { "prettier" },
 				html = { "prettier" },
 				htmlangular = { "prettier" },
 				scss = { "prettier" },
-				javascript = { "prettier" },
-				typescript = { "prettier" },
 				json = { "prettier" },
 			},
 			format_on_save = {
@@ -21,6 +40,15 @@ return {
 				async = false,
 				timeout_ms = 1000,
 			},
+			formatters = {
+				-- Configuration for global installation of csharpier after v1.0.0
+				csharpier = {
+					command = "csharpier",
+					args = { "format", "$FILENAME" },
+					stdin = false,
+				},
+			},
+			log_level = vim.log.levels.TRACE,
 		})
 
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
