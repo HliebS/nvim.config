@@ -48,7 +48,6 @@ return {
 					stdin = false,
 				},
 			},
-			log_level = vim.log.levels.TRACE,
 		})
 
 		vim.keymap.set({ "n", "v" }, "<leader>mp", function()
