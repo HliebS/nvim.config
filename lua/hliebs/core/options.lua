@@ -69,20 +69,17 @@ vim.filetype.add({
 	},
 })
 
-vim.lsp.set_log_level("warn")
+vim.lsp.set_log_level("WARN")
 
--- Save original handler
 local orig_handler = vim.lsp.handlers["window/showMessage"]
 
--- Override
+---@param params lsp.LogMessageParams
 vim.lsp.handlers["window/showMessage"] = function(err, params, ctx, config)
-	local message = params and params.message or ""
+	local client = vim.lsp.get_client_by_id(ctx.client_id) or {}
 
-	-- Filter out known noisy csharp-ls messages
-	if message:match("^csharp%-ls:") then
-		return -- Skip these messages
+	if client.name == "csharp_ls" and params.type == 3 then
+		return
 	end
 
-	-- Fallback to original behavior
 	return orig_handler(err, params, ctx, config)
 end
