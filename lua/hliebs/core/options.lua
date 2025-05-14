@@ -70,16 +70,3 @@ vim.filetype.add({
 })
 
 vim.lsp.set_log_level("WARN")
-
-local orig_handler = vim.lsp.handlers["window/showMessage"]
-
----@param params lsp.LogMessageParams
-vim.lsp.handlers["window/showMessage"] = function(err, params, ctx, config)
-	local client = vim.lsp.get_client_by_id(ctx.client_id) or {}
-
-	if client.name == "csharp_ls" and params.type == 3 then
-		return
-	end
-
-	return orig_handler(err, params, ctx, config)
-end
