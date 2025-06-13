@@ -12,6 +12,6 @@ return {
 			end
 		end
 
-		vim.keymap.set("n", "<leader>gi", toggle_fugitive, { desc = "Toggle Git" })
+		vim.keymap.set("n", "<leader>gst", toggle_fugitive, { desc = "Toggle Git" })
 	end,
 }
