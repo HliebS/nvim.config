@@ -32,5 +32,8 @@ return {
 		keymap.set("n", "<leader>ft", "<cmd>Telescope grapple tags<cr>", { desc = "Find tags" })
 
 		keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>", { desc = "Find file changes" })
+
+		telescope.load_extension("bookmarks")
+		keymap.set("n", "<leader>fm", "<cmd>Telescope bookmarks list<cr>", { desc = "Find marks" })
 	end,
 }
