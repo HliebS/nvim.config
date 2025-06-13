@@ -3,38 +3,33 @@ return {
 	dependencies = {
 		"windwp/nvim-ts-autotag",
 	},
+	lazy = false,
+	branch = "main",
 	build = ":TSUpdate",
-	config = function()
-		local treesitter = require("nvim-treesitter.configs")
 
-		treesitter.setup({
-			modules = {},
-			ensure_installed = {
-				-- Defaults
-				"c",
-				"lua",
-				"vim",
-				"vimdoc",
-				"query",
-				"markdown",
-				"markdown_inline",
-				-- Backend
-				"c_sharp",
-				"xml",
-				"python",
-				"pascal",
-				-- Frontend
-				"html",
-				"css",
-				"scss", -- Sass
-				"typescript",
-				"angular",
-			},
-			auto_install = false,
-			ignore_install = {},
-			sync_install = false,
-			highlight = { enable = true },
-			indent = { enable = true },
+	config = function()
+		local treesitter = require("nvim-treesitter")
+
+		treesitter.install({
+			"c",
+			"lua",
+			"luadoc",
+			"vim",
+			"vimdoc",
+			"query",
+			"markdown",
+			"markdown_inline",
+			-- Backend
+			"c_sharp",
+			"xml",
+			"python",
+			"pascal",
+			-- Frontend
+			"html",
+			"css",
+			"scss", -- Sass
+			"typescript",
+			"angular",
 		})
 
 		local autotag = require("nvim-ts-autotag")
