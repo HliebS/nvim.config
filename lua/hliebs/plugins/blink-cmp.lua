@@ -17,7 +17,9 @@ return {
 		-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
 		-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
 		-- See the full "keymap" documentation for information on defining your own keymap.
-		keymap = { preset = "default" },
+		keymap = {
+			preset = "default",
+		},
 
 		appearance = {
 			-- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -34,13 +36,20 @@ return {
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer" },
 		},
+
+		completion = {
+			documentation = {
+				auto_show = true,
+			},
+		},
+
 		cmdline = {
 			keymap = {
-				-- recommended, as the default keymap will only show and select the next item
-				["<Tab>"] = { "show", "accept" },
+				preset = "default",
 			},
 			completion = { menu = { auto_show = true } },
 		},
 	},
+
 	opts_extend = { "sources.default" },
 }
