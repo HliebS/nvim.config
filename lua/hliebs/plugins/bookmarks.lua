@@ -49,10 +49,13 @@ return {
 			save_file = bookmark_file_path, -- bookmarks save file path
 
 			keywords = {
-				["@t"] = " ", -- mark annotation startswith @t ,signs this icon as `Todo`
-				["@w"] = " ", -- mark annotation startswith @w ,signs this icon as `Warn`
-				["@f"] = " ", -- mark annotation startswith @f ,signs this icon as `Fix`
-				["@n"] = " ", -- mark annotation startswith @n ,signs this icon as `Note`
+				["@t"] = " ", -- mark annotation starting with @t, is typed as "Todo"
+				["@w"] = " ", -- mark annotation starting with @w, is typed as "Warn"
+				["@f"] = " ", -- mark annotation starting with @f, is typed as "Fix"
+				["@n"] = " ", -- mark annotation starting with @n, is typed as "Note"
+				["@q"] = " ", -- mark annotation starting with @q, is typed as "Question"
+				["@r"] = " ", -- mark annotation starting with @q, is typed as "Refactor"
+				["@d"] = " ", -- mark annotation starting with @d, is typed as "Delete"
 			},
 
 			on_attach = function(bufnr)
