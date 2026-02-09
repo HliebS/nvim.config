@@ -26,7 +26,7 @@ return {
 		conform.setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				cs = { "csharpier" },
+				--cs = { "csharpier" },
 				python = { "black" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
