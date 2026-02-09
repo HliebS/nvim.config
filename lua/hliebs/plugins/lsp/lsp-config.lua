@@ -75,6 +75,8 @@ return {
 			-- `opts[server].capabilities, if you've defined it
 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
 
+			local default = vim.lsp.config[server]
+
 			if server == "html" then
 				config.capabilities.textDocument.completion.completionItem.snippetSupport = true
 			end
@@ -83,7 +85,8 @@ return {
 				require("csharpls_extended").buf_read_cmd_bind()
 			end
 
-			lspconfig[server].setup(vim.tbl_deep_extend("force", config, server_configs[server] or {}))
+			vim.lsp.config[server] = vim.tbl_deep_extend("force", default, config or {})
+			vim.lsp.enable(server)
 		end
 
 		vim.api.nvim_create_autocmd("LspAttach", {
