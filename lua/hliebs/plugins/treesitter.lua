@@ -16,7 +16,6 @@ return {
 			"luadoc",
 			"vim",
 			"vimdoc",
-			"query",
 			"markdown",
 			"markdown_inline",
 			-- Backend
