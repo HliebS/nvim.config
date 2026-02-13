@@ -44,31 +44,35 @@ return {
 	},
 	config = function(_, opts)
 		local server_configs = {
+			lua_ls = {
+				cmd = {
+					"lua-language-server",
+					"--logpath=" .. os.getenv("USERPROFILE") .. "\\.cache\\lua-language-server",
+				},
+			},
 			html = {
-				filetypes = { "html", "htmlangular", "templ" },
+				filetypes = { "html", "htmlangular" },
+			},
+			angularls = {
+				filetypes = { "typescript", "html", "htmlangular" },
+			},
 			cssls = {
 				filetypes = { "css" },
 			},
 			tailwindcss = {
+				filetypes = {
+					"html",
+					"htmlangular",
+					"markdown",
+					"css",
+					"less",
+					"sass",
+					"scss",
+					"javascript",
+					"typescript",
+				},
 				settings = {
 					tailwindCSS = {
-						validate = true,
-						lint = {
-							cssConflict = "warning",
-							invalidApply = "error",
-							invalidScreen = "error",
-							invalidVariant = "error",
-							invalidConfigPath = "ignore",
-							invalidTailwindDirective = "error",
-							recommendedVariantOrder = "warning",
-						},
-						classAttributes = {
-							"class",
-							"className",
-							"class:list",
-							"classList",
-							"ngClass",
-						},
 						includeLanguages = {
 							htmlangular = "html",
 						},
