@@ -42,8 +42,6 @@ return {
 		},
 	},
 	config = function(_, opts)
-		local lspconfig = require("lspconfig")
-
 		local server_configs = {
 			html = {
 				filetypes = { "html", "htmlangular", "templ" },
@@ -97,7 +95,7 @@ return {
 				config.capabilities.textDocument.completion.completionItem.snippetSupport = true
 			end
 
-			vim.lsp.config[server] = vim.tbl_deep_extend("force", default, config or {})
+			vim.lsp.config[server] = vim.tbl_deep_extend("force", default, server_configs[server] or {})
 			vim.lsp.enable(server)
 		end
 
