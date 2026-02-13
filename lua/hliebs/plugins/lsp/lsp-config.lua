@@ -37,6 +37,7 @@ return {
 			tailwindcss = {},
 
 			--Typescript LSP is provided by typescript-tools.nvim
+			eslint = {},
 
 			jsonls = {},
 		},
