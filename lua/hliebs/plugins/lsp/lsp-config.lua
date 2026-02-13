@@ -26,7 +26,13 @@ return {
 
 			angularls = {},
 
+			-- SCSS & SASS LSP
 			somesass_ls = {},
+
+			-- CSS LSP
+			cssls = {},
+
+			css_variables = {},
 
 			tailwindcss = {},
 
@@ -41,6 +47,8 @@ return {
 		local server_configs = {
 			html = {
 				filetypes = { "html", "htmlangular", "templ" },
+			cssls = {
+				filetypes = { "css" },
 			},
 			tailwindcss = {
 				settings = {
@@ -77,12 +85,16 @@ return {
 
 			local default = vim.lsp.config[server]
 
+			if server == "csharp_ls" then
+				require("csharpls_extended").buf_read_cmd_bind()
+			end
+
 			if server == "html" then
 				config.capabilities.textDocument.completion.completionItem.snippetSupport = true
 			end
 
-			if server == "csharp_ls" then
-				require("csharpls_extended").buf_read_cmd_bind()
+			if server == "cssls" then
+				config.capabilities.textDocument.completion.completionItem.snippetSupport = true
 			end
 
 			vim.lsp.config[server] = vim.tbl_deep_extend("force", default, config or {})
