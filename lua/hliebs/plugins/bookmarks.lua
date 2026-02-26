@@ -11,12 +11,18 @@ local function get_path_sep()
 	end
 end
 
+local function get_bookmark_dir_path()
+	return vim.fn.stdpath("data") .. get_path_sep() .. "nvim_bookmarks"
+end
+
 -- Ensure that the given directory exists, create it if necessary
 local function ensure_directory_exists(dir_path)
 	if vim.fn.exists(dir_path) == 0 or vim.fn.isdirectory(dir_path) == 0 then
 		-- Create directory recursively, similar to `mkdir -p`
 		vim.fn.mkdir(dir_path, "p")
 	end
+
+	return true
 end
 
 -- Generate the path for the bookmark file, scoped to the current project
@@ -30,13 +36,41 @@ local function get_bookmark_path()
 	end
 
 	-- Define the directory for storing bookmarks
-	local bookmark_dir = vim.fn.stdpath("data") .. path_sep .. "nvim_bookmarks"
+	local bookmark_dir = get_bookmark_dir_path()
 	-- Ensure the directory exists
 	ensure_directory_exists(bookmark_dir)
 
 	-- Return the full path to the bookmark file
 	return bookmark_dir .. path_sep .. base_filename:gsub(path_sep, "_") .. ".json"
 end
+
+local function cleanup_bookmarks()
+	local bookmark_dir = get_bookmark_dir_path()
+
+	local handle = vim.uv.fs_scandir(bookmark_dir)
+	if not handle then
+		return
+	end
+
+	while true do
+		local name, type = vim.uv.fs_scandir_next(handle)
+		if not name then
+			break
+		end
+
+		-- Only process .json files
+		if type == "file" and name:match("%.json$") then
+			local full_path = bookmark_dir .. get_path_sep() .. name
+			local stat = vim.uv.fs_stat(full_path)
+
+			-- Check for the specific "empty" size
+			if stat and stat.size < 12 then
+				vim.uv.fs_unlink(full_path)
+			end
+		end
+	end
+end
+cleanup_bookmarks()
 
 -- Define the path for the bookmark file
 local bookmark_file_path = get_bookmark_path()
@@ -58,7 +92,7 @@ return {
 				["@d"] = " ", -- mark annotation starting with @d, is typed as "Delete"
 			},
 
-			on_attach = function(bufnr)
+			on_attach = function()
 				local bm = require("bookmarks")
 				local keymap = vim.keymap
 
@@ -69,13 +103,6 @@ return {
 				keymap.set("n", "mp", bm.bookmark_prev) -- jump to previous mark in local buffer
 				keymap.set("n", "ml", bm.bookmark_list) -- show marked file list in quickfix window
 				keymap.set("n", "<leader>mX", bm.bookmark_clear_all) -- removes all bookmarks
-
-				local function bookmark_create_with_annotation()
-					bm.bookmark_toggle()
-					bm.bookmark_ann()
-				end
-
-				keymap.set("n", "mM", bookmark_create_with_annotation, { desc = "Add a bookmark with annotation" })
 			end,
 		})
 	end,
